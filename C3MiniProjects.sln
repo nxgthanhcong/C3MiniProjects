@@ -7,7 +7,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "C3MiniProjects", "C3MiniPro
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VnExpressCrawler", "VnExpressCrawler\VnExpressCrawler.csproj", "{6A63995F-016D-47CB-802C-56B99EF5EB6C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LotteryTicketCrawler", "LotteryTicketCrawler\LotteryTicketCrawler.csproj", "{54E1D983-0EA9-4F71-A17F-45327657104F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LotteryTicketCrawler", "LotteryTicketCrawler\LotteryTicketCrawler.csproj", "{54E1D983-0EA9-4F71-A17F-45327657104F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Notes", "Notes\Notes.csproj", "{B1E61ED0-6A6A-4760-8C6F-BC7174CEEF27}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{54E1D983-0EA9-4F71-A17F-45327657104F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{54E1D983-0EA9-4F71-A17F-45327657104F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{54E1D983-0EA9-4F71-A17F-45327657104F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B1E61ED0-6A6A-4760-8C6F-BC7174CEEF27}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B1E61ED0-6A6A-4760-8C6F-BC7174CEEF27}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B1E61ED0-6A6A-4760-8C6F-BC7174CEEF27}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B1E61ED0-6A6A-4760-8C6F-BC7174CEEF27}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
