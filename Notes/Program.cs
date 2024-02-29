@@ -1,5 +1,6 @@
 ﻿
 using Notes;
+using System.Text.Json;
 
 Dictionary<int, string> menu = new Dictionary<int, string>
 {
@@ -10,39 +11,112 @@ Dictionary<int, string> menu = new Dictionary<int, string>
 };
 
 int selectedMenu = 0;
-List<Note> notes = new List<Note>();
+List<Note> notes = GetFromTxt();
 
 do
 {
     Console.WriteLine("Here is our menu: ");
     foreach (var item in menu)
     {
-        Console.WriteLine(item);
+        Console.WriteLine($"{item.Key}: {item.Value}");
     }
-    Console.Write("select your action, (0 to exist): ");
+
+    Console.Write("Select your action (0 to exit): ");
     int.TryParse(Console.ReadLine(), out selectedMenu);
 
-    if(selectedMenu == 1)
+    switch (selectedMenu)
     {
-        for(int i = 0; i < notes.Count; i++)
-        {
-            Console.WriteLine($"Id: {notes[i].Id}, Title: {notes[i].Title}, UpdateDate: {notes[i].UpdateDate}");
-        }
+        case 1:
+            ShowListNote(notes);
+            break;
+        case 2:
+            AddNewNote(notes);
+            break;
+        case 3:
+            UpdateNote(notes);
+            break;
+        case 4:
+            DeleteNote(notes);
+            break;
+        default:
+            SaveToTxtFile(notes);
+            Console.WriteLine("Invalid selection. Please try again.");
+            break;
     }
 
-    if (selectedMenu == 2)
-    {
-        Console.WriteLine("Enter new note: ");
-        string newNote = Console.ReadLine();
-        notes.Add(new Note
-        {
-            Id = notes.Count > 0 ? notes.Max(x => x.Id) : 0,
-            Title = newNote,
-            UpdateDate = DateTime.Now,
-        });
-    }
-
-    Console.WriteLine();
-    Console.WriteLine();
+    Console.WriteLine("\n");
 
 } while (selectedMenu != 0);
+
+static void SaveToTxtFile(List<Note> notes)
+{
+    string fileName = "dbtemp.txt";
+    File.WriteAllText(fileName, JsonSerializer.Serialize(notes));
+}
+
+static List<Note> GetFromTxt()
+{
+    string fileName = "dbtemp.txt";
+    if (!File.Exists(fileName))
+    {
+        return new List<Note>();
+    }
+
+    return JsonSerializer.Deserialize<List<Note>>(File.ReadAllText(fileName));
+}
+
+static void ShowListNote(List<Note> notes)
+{
+    foreach (var note in notes)
+    {
+        Console.WriteLine($"Id: {note.Id}, Title: {note.Title}, UpdateDate: {note.UpdateDate}");
+    }
+}
+
+static void AddNewNote(List<Note> notes)
+{
+    Console.WriteLine("Enter new note: ");
+    string newNote = Console.ReadLine();
+    notes.Add(new Note
+    {
+        Id = notes.Count > 0 ? (notes.Max(x => x.Id) + 1) : 1,
+        Title = newNote,
+        UpdateDate = DateTime.Now,
+    });
+}
+
+static void UpdateNote(List<Note> notes)
+{
+    Console.WriteLine("Enter noteId: ");
+    int updateNoteId = int.Parse(Console.ReadLine());
+
+    Console.WriteLine("Enter new title: ");
+    string updateNoteTitle = Console.ReadLine();
+
+    Note updateNote = notes.FirstOrDefault(s => s.Id == updateNoteId);
+    if (updateNote != null)
+    {
+        updateNote.Title = updateNoteTitle;
+        updateNote.UpdateDate = DateTime.Now;
+    }
+    else
+    {
+        Console.WriteLine("Note not found.");
+    }
+}
+
+static void DeleteNote(List<Note> notes)
+{
+    Console.WriteLine("Enter noteId: ");
+    int updateNoteId = int.Parse(Console.ReadLine());
+
+    Note noteToDelete = notes.FirstOrDefault(s => s.Id == updateNoteId);
+    if (noteToDelete != null)
+    {
+        notes.Remove(noteToDelete);
+    }
+    else
+    {
+        Console.WriteLine("Note not found.");
+    }
+}

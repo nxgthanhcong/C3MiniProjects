@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VnExpressCrawler", "VnExpre
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LotteryTicketCrawler", "LotteryTicketCrawler\LotteryTicketCrawler.csproj", "{54E1D983-0EA9-4F71-A17F-45327657104F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Notes", "Notes\Notes.csproj", "{B1E61ED0-6A6A-4760-8C6F-BC7174CEEF27}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Notes", "Notes\Notes.csproj", "{B1E61ED0-6A6A-4760-8C6F-BC7174CEEF27}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -5,17 +5,24 @@ using LotteryTicketCrawler;
 
 Console.OutputEncoding = System.Text.Encoding.UTF8;
 
-HtmlWeb web = new HtmlWeb();
-HtmlDocument doc = web.Load("https://xoso.com.vn/xo-so-mien-nam/xsmn-p1.html");
-
-List<LotteryResult> lotteryResults = ParseLotteryResults(doc);
-
-foreach (var result in lotteryResults)
+try
 {
-    Console.WriteLine($"Province: {result.Province}, Date: {result.Date}, Prize: {result.Prize}, Number: {result.Number}");
-}
+    HtmlWeb web = new HtmlWeb();
+    HtmlDocument doc = web.Load("https://xoso.com.vn/xo-so-mien-nam/xsmn-p1.html");
 
-Console.ReadKey();
+    List<LotteryResult> lotteryResults = ParseLotteryResults(doc);
+
+    foreach (var result in lotteryResults)
+    {
+        Console.WriteLine($"Province: {result.Province}, Date: {result.Date}, Prize: {result.Prize}, Number: {result.Number}");
+    }
+
+    Console.ReadKey();
+}
+catch(Exception ex)
+{
+    throw;
+}
 
 List<LotteryResult> ParseLotteryResults(HtmlDocument doc)
 {
