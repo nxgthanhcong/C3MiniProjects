@@ -11,6 +11,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LotteryTicketCrawler", "Lot
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Notes", "Notes\Notes.csproj", "{B1E61ED0-6A6A-4760-8C6F-BC7174CEEF27}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LotteryTicketCronJob", "LotteryTicketCronJob\LotteryTicketCronJob.csproj", "{69C98D86-EE13-4112-9954-1EA9EFE607BE}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TelegramBotWorker", "TelegramBotWorker\TelegramBotWorker.csproj", "{7805228E-DD9B-46C2-9665-F43C785658BF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +37,14 @@ Global
 		{B1E61ED0-6A6A-4760-8C6F-BC7174CEEF27}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B1E61ED0-6A6A-4760-8C6F-BC7174CEEF27}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B1E61ED0-6A6A-4760-8C6F-BC7174CEEF27}.Release|Any CPU.Build.0 = Release|Any CPU
+		{69C98D86-EE13-4112-9954-1EA9EFE607BE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{69C98D86-EE13-4112-9954-1EA9EFE607BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{69C98D86-EE13-4112-9954-1EA9EFE607BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{69C98D86-EE13-4112-9954-1EA9EFE607BE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7805228E-DD9B-46C2-9665-F43C785658BF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7805228E-DD9B-46C2-9665-F43C785658BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7805228E-DD9B-46C2-9665-F43C785658BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7805228E-DD9B-46C2-9665-F43C785658BF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

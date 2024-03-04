@@ -1,0 +1,5 @@
+﻿{
+  "monetary": "tiền tệ",
+  "goofily": "ngớ ngẩn",
+  "stoutish": "mập mạp"
+}
