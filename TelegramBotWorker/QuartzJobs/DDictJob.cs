@@ -1,66 +1,32 @@
 ﻿using Quartz;
-using System;
-using System.Text.Json;
 using Telegram.Bot;
-using Telegram.Bot.Types;
+using Translation.Business.Interfaces;
+using Translation.Models.DataModels;
 
 namespace TelegramBotWorker.QuartzJobs
 {
     public class DDictJob : IJob
     {
         private static TelegramBotClient botClient = new TelegramBotClient("1869826512:AAHagbHuIMp6uL0o-Tt1LIoPNwb7fJQNsXs");
+        ITranslationBusiness _translationBusiness;
+
+        public DDictJob(ITranslationBusiness translationBusiness)
+        {
+            _translationBusiness = translationBusiness;
+        }
 
         public async Task Execute(IJobExecutionContext context)
         {
-            Dictionary<string, string> ddict = await GetDDictFromFile("Assets/dict.txt");
-
-            int currentIndex = await GetCurrentIndex();
-
-            var kvpAtIndex = ddict.ElementAt(currentIndex);
-            var keyAtIndex = kvpAtIndex.Key;
-            var valueAtIndex = kvpAtIndex.Value;
-
-            List<long> customers = await GetDictCustomersFromFile();
-            foreach( var customer in customers )
+            TranslationData translationData = await _translationBusiness.GetRandomTranslation();
+            List<string> customers = new List<string>
             {
-                await botClient.SendTextMessageAsync(chatId: customer, text: $"{keyAtIndex} - {valueAtIndex}");
-            }
-
-            if (currentIndex < ddict.Count - 1)
+                "1605537163",
+                //"6892907913",
+            };
+            foreach ( var customer in customers)
             {
-                await SetCurrentIndex(currentIndex + 1);
+                await botClient.SendTextMessageAsync(chatId: customer, text: $"{translationData.Word.WordText} - {translationData.TranslatedWord.WordText}");
             }
         }
-
-        private async Task<int> GetCurrentIndex()
-        {
-            string dictText = await System.IO.File.ReadAllTextAsync("Assets/currentIndex.txt");
-            int.TryParse(dictText, out int rs);
-            return rs;
-        }
-
-        private async Task SetCurrentIndex(int index)
-        {
-            await System.IO.File.WriteAllTextAsync("Assets/currentIndex.txt", index.ToString());
-        }
-
-        private async Task<Dictionary<string, string>> GetDDictFromFile(string filePath)
-        {
-            string dictText = await System.IO.File.ReadAllTextAsync(filePath);
-            Dictionary<string, string> ddict = new Dictionary<string, string>();
-            if (!string.IsNullOrEmpty(dictText))
-            {
-                ddict = JsonSerializer.Deserialize<Dictionary<string, string>>(dictText);
-            }
-
-            return ddict;
-        }
-
-        private async Task<List<long>> GetDictCustomersFromFile()
-        {
-            string dictText = await System.IO.File.ReadAllTextAsync("Assets/dictCustomers.txt");
-            return JsonSerializer.Deserialize<List<long>>(dictText);
-        }
-
     }
 }

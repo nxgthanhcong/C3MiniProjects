@@ -1,19 +1,23 @@
-﻿using System.Text;
-using System.Text.Json;
-using Telegram.Bot;
+﻿using Telegram.Bot;
 using Telegram.Bot.Exceptions;
 using Telegram.Bot.Polling;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
-using TelegramBotWorker.Models;
-using JsonSerializer = System.Text.Json.JsonSerializer;
+using Translation.Business.Interfaces;
 
 namespace TelegramBotWorker.Listeners
 {
-    public class DictionaryBotListener
+    public class DictionaryBotListener : IDictionaryBotListener
     {
+        ITranslationBusiness _translationBusiness;
+        
         private static TelegramBotClient botClient;
         private static CancellationTokenSource cts;
+
+        public DictionaryBotListener(ITranslationBusiness translationBusiness)
+        {
+            _translationBusiness = translationBusiness;
+        }
 
         public async Task ListenIncommingMessage()
         {
@@ -44,38 +48,18 @@ namespace TelegramBotWorker.Listeners
         {
             try
             {
-                string filePath = "Assets/dict.txt";
-
                 Message message = update.Message;
                 long chatId = message.Chat.Id;
                 string messageText = message?.Text;
                 string username = message.From.FirstName;
 
                 Console.WriteLine($"Received a '{messageText}' message in chat {chatId} of {username}.");
-                if(messageText.Contains("cmdreset"))
-                {
-                    await System.IO.File.WriteAllTextAsync(filePath, string.Empty);
-                    return;
-                }
 
-                Word w = GetWordFromMessage(messageText);
-
-                Dictionary<string, string> ddict = await GetDDictFromFile(filePath);
-                ddict.Add(w.En, w.Vi);
-
-                await WriteDDictToFile(filePath, ddict);
+                await _translationBusiness.SaveTranslationFromMessage(messageText);
 
                 await botClient.SendTextMessageAsync(
                        chatId: update.Message.Chat.Id,
                        text: "word save succeed",
-                       cancellationToken: cancellationToken
-                       );
-            }
-            catch (System.ArgumentException ex)
-            {
-                await botClient.SendTextMessageAsync(
-                       chatId: update.Message.Chat.Id,
-                       text: "this word already exist",
                        cancellationToken: cancellationToken
                        );
             }
@@ -87,42 +71,6 @@ namespace TelegramBotWorker.Listeners
                        cancellationToken: cancellationToken
                        );
             }
-        }
-
-        private Word GetWordFromMessage(string messageText)
-        {
-            string trimedMessageText = messageText.Trim().ToLower();
-
-            string[] splited = trimedMessageText.Split('-');
-
-            Word w = new Word
-            {
-                En = splited[0].Trim(),
-                Vi = splited[1].Trim(),
-            };
-
-            return w;
-        }
-        
-        private async Task<Dictionary<string, string>> GetDDictFromFile(string filePath)
-        {
-            string dictText = await System.IO.File.ReadAllTextAsync(filePath);
-            Dictionary<string, string> ddict = new Dictionary<string, string>();
-            if (!string.IsNullOrEmpty(dictText))
-            {
-                ddict = JsonSerializer.Deserialize<Dictionary<string, string>>(dictText);
-            }
-
-            return ddict;
-        }
-
-        private async Task WriteDDictToFile(string filePath, Dictionary<string, string> ddict)
-        {
-            await System.IO.File.WriteAllTextAsync(filePath, JsonSerializer.Serialize(ddict, new JsonSerializerOptions
-            {
-                Encoder = System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping,
-                WriteIndented = true
-            }), Encoding.UTF8);
         }
     }
 }

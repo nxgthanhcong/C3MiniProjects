@@ -13,6 +13,14 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LotteryTicketCronJob", "Lot
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TelegramBotWorker", "TelegramBotWorker\TelegramBotWorker.csproj", "{7805228E-DD9B-46C2-9665-F43C785658BF}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "translation-service", "translation-service", "{4FB6EB1A-3982-4CDD-8C38-D4DD9CEEEB4C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Translation.Business", "translation-service\Translation.Business\Translation.Business.csproj", "{96C446B5-EAA8-4B4A-B1C2-BA311ED2753A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Translation.Repositories", "translation-service\Translation.Repositories\Translation.Repositories.csproj", "{32FC30AF-81E5-4D20-BACB-49F404C96217}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Translation.Models", "translation-service\Translation.Models\Translation.Models.csproj", "{B184CEDE-0E4E-48FE-B0DA-4B2B851EB502}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,9 +47,26 @@ Global
 		{7805228E-DD9B-46C2-9665-F43C785658BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7805228E-DD9B-46C2-9665-F43C785658BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7805228E-DD9B-46C2-9665-F43C785658BF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{96C446B5-EAA8-4B4A-B1C2-BA311ED2753A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{96C446B5-EAA8-4B4A-B1C2-BA311ED2753A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{96C446B5-EAA8-4B4A-B1C2-BA311ED2753A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{96C446B5-EAA8-4B4A-B1C2-BA311ED2753A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{32FC30AF-81E5-4D20-BACB-49F404C96217}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{32FC30AF-81E5-4D20-BACB-49F404C96217}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{32FC30AF-81E5-4D20-BACB-49F404C96217}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{32FC30AF-81E5-4D20-BACB-49F404C96217}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B184CEDE-0E4E-48FE-B0DA-4B2B851EB502}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B184CEDE-0E4E-48FE-B0DA-4B2B851EB502}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B184CEDE-0E4E-48FE-B0DA-4B2B851EB502}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B184CEDE-0E4E-48FE-B0DA-4B2B851EB502}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{96C446B5-EAA8-4B4A-B1C2-BA311ED2753A} = {4FB6EB1A-3982-4CDD-8C38-D4DD9CEEEB4C}
+		{32FC30AF-81E5-4D20-BACB-49F404C96217} = {4FB6EB1A-3982-4CDD-8C38-D4DD9CEEEB4C}
+		{B184CEDE-0E4E-48FE-B0DA-4B2B851EB502} = {4FB6EB1A-3982-4CDD-8C38-D4DD9CEEEB4C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {B15F3706-7D91-46AE-AFE9-C32364A1DED1}

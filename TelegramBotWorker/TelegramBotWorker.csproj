@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Worker">
+﻿<Project Sdk="Microsoft.NET.Sdk.Worker">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
@@ -14,6 +14,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Assets\" />
+    <ProjectReference Include="..\translation-service\Translation.Business\Translation.Business.csproj" />
+    <ProjectReference Include="..\translation-service\Translation.Models\Translation.Models.csproj" />
+    <ProjectReference Include="..\translation-service\Translation.Repositories\Translation.Repositories.csproj" />
   </ItemGroup>
 </Project>

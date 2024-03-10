@@ -1,25 +1,20 @@
 using TelegramBotWorker.Listeners;
+using Translation.Repositories.Interfaces;
 
 namespace TelegramBotWorker
 {
     public class Worker : BackgroundService
     {
-        private readonly ILogger<Worker> _logger;
+        private readonly IDictionaryBotListener _dictionaryBotListener;
 
-        public Worker(ILogger<Worker> logger)
+        public Worker(IDictionaryBotListener dictionaryBotListener)
         {
-            _logger = logger;
+            _dictionaryBotListener = dictionaryBotListener;
         }
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
-            //while (!stoppingToken.IsCancellationRequested)
-            //{
-            //    _logger.LogInformation("Push dict running at: {time}", DateTimeOffset.Now);
-
-            //    await Task.Delay(1000, stoppingToken);
-            //}
-            new DictionaryBotListener().ListenIncommingMessage();
+            _dictionaryBotListener.ListenIncommingMessage();
         }
     }
 }
